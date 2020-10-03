@@ -1,0 +1,76 @@
+{
+    "variables": {
+        "vm_name": "debian-arm64",
+        "iso_url": "http://ftp.debian.org/debian/dists/buster/main/installer-arm64/current/images/netboot/mini.iso",
+        "iso_checksum_type": "sha512",
+        "iso_checksum": "26275dd36c4bc81c6f6d52864ac33aea82c39cd958907e55a9c5734c2aeab346e7ffed3fc01e3f9aa0bfea5f96db5245e42c607c963803ab61357856ea8952c8",
+        "ssh_username": "vagrant",
+        "ssh_password": "vagrant",
+        "ssh_wait_timeout": "6h",
+        "disk_size_MB": "8000",
+        "http_directory": "http",
+        "shutdown_command": "echo 'vagrant' | sudo -S halt -p"
+    },
+    "builders": [
+        {
+            "type": "qemu",
+            "accelerator": "kvm",
+            "machine_type": "virt",
+            "memory": 1024,
+            "cpus": 2,
+            "net_device": "virtio-net",
+            "use_default_display": true,
+            "vm_name": "{{ user `vm_name` }}",
+            "iso_url": "{{ user `iso_url` }}",
+            "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+            "iso_checksum": "{{ user `iso_checksum` }}",
+            "ssh_username": "{{ user `ssh_username` }}",
+            "ssh_password": "{{ user `ssh_password` }}",
+            "ssh_wait_timeout": "{{ user `ssh_wait_timeout` }}",
+            "disk_size": "{{ user `disk_size_MB` }}",
+            "disk_detect_zeroes": "on",
+            "disk_interface": "virtio-scsi",
+            "format": "raw",
+            "qemu_binary": "qemu-system-aarch64",
+            "qemuargs": [
+                [ "-bios", "/usr/share/qemu-efi-aarch64/QEMU_EFI.fd" ],
+                [ "-machine", "virt,gic-version=3" ],
+                [ "-cpu", "cortex-a53" ],
+                [ "-monitor", "none" ],
+                [ "-boot", "strict=off" ]
+            ],
+            "headless": true,
+            "http_directory": "http",
+            "boot_command": [
+                "c<wait>",
+                "linux /linux ",
+                "locale=en_US.UTF-8 ",
+                "keyboard-configuration/xkb-keymap=us ",
+                "debconf/frontend=noninteractive ",
+                "netcfg/get_hostname=unassigned-hostname ",
+                "netcfg/get_domain=unassigned-domain ",
+                "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<wait> ",
+                "auto ",
+                "---",
+                "<enter><wait>",
+                "initrd /initrd.gz",
+                "<enter><wait>",
+                "boot<enter><wait>"
+            ],
+            "shutdown_command": "{{ user `shutdown_command` }}"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -ES sh {{.Path}}",
+            "scripts": [
+                "scripts/fix-vagrant-ssh.debian.sh",
+                "scripts/add-ssh-keys.sh",
+                "scripts/apt-pinning.sh",
+                "scripts/raspi-firmware.sh",
+                "scripts/cleanup.debian.sh"
+            ]
+        }
+    ]
+}
