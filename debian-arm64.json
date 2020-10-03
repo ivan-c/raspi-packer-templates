@@ -41,7 +41,9 @@
             "disk_size": "{{ user `disk_size_MB` }}",
             "qemu_binary": "qemu-system-aarch64",
             "qemuargs": [
-                ["-m", "{{ user `ram_MiB` }}"]
+                [ "-machine", "virt" ],
+                [ "-device", "virtio-gpu-pci" ],
+                [ "-boot", "strict=off" ]
             ],
             "http_directory": "http",
             "boot_command": [
