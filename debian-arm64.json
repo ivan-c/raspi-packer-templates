@@ -35,7 +35,7 @@
     "builders": [
         {
             "type": "qemu",
-            "machine_type": "ast2500-evb",
+            "machine_type": "virt",
             "accelerator": "tcg",
             "net_device": "virtio-net",
             "use_default_display": true,
