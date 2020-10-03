@@ -1,9 +1,9 @@
 {
     "variables": {
         "vm_name": "debian-arm64",
-        "iso_url": "https://cdimage.debian.org/cdimage/release/9.8.0/arm64/iso-cd/debian-9.8.0-arm64-netinst.iso",
+        "iso_url": "https://cdimage.debian.org/cdimage/release/10.6.0/arm64/iso-cd/debian-10.6.0-arm64-netinst.iso",
         "iso_checksum_type": "sha512",
-        "iso_checksum_url": "https://cdimage.debian.org/cdimage/release/9.8.0/arm64/iso-cd/SHA512SUMS",
+        "iso_checksum_url": "https://cdimage.debian.org/cdimage/release/10.6.0/arm64/iso-cd/SHA512SUMS",
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
         "ssh_wait_timeout": "6h",
