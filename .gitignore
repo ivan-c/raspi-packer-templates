@@ -1,0 +1,5 @@
+# packer output directories
+output-*
+
+# packer cache directory
+packer_cache
