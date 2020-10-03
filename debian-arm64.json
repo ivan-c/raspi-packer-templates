@@ -24,14 +24,6 @@
             ]
         }
     ],
-    "post-processors": [
-        {
-            "type": "vagrant",
-            "output": "{{ user `vm_name` }}-{{.Provider}}.box",
-            "compression_level": "9",
-            "vagrantfile_template": "Vagrantfile"
-        }
-    ],
     "builders": [
         {
             "type": "qemu",
