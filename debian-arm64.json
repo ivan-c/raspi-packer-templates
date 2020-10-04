@@ -50,7 +50,9 @@
             "http_directory": "http",
             "boot_wait": "30s",
             "boot_command": [
-                "<esc><wait>",
+                "c<wait>",
+                "initrd /install.a64/initrd.gz<enter>",
+                "linux /install.a64/vmlinuz",
                 "install <wait>",
                 " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
                 "auto <wait>",
@@ -59,7 +61,8 @@
                 "fb=false <wait>",
                 "debconf/frontend=noninteractive <wait>",
                 "grub-installer/bootdev=/dev/sda <wait>",
-                "<enter><wait>"
+                "console=ttyS0 <wait>",
+                "<enter>boot<enter><wait>"
             ],
             "shutdown_command": "{{ user `shutdown_command` }}"
         }
