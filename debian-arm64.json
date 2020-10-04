@@ -41,6 +41,8 @@
             "disk_size": "{{ user `disk_size_MB` }}",
             "qemu_binary": "qemu-system-aarch64",
             "qemuargs": [
+                [ "-bios", "/usr/share/qemu-efi-aarch64/QEMU_EFI.fd" ],
+                [ "-cpu", "cortex-a53" ],
                 [ "-boot", "strict=off" ]
             ],
             "http_directory": "http",
