@@ -47,6 +47,7 @@
             ],
             "headless": true,
             "http_directory": "http",
+            "boot_wait": "30s",
             "boot_command": [
                 "<esc><wait>",
                 "install <wait>",
