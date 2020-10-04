@@ -43,6 +43,7 @@
             "qemuargs": [
                 [ "-bios", "/usr/share/qemu-efi-aarch64/QEMU_EFI.fd" ],
                 [ "-cpu", "cortex-a53" ],
+                [ "-nographic" ],
                 [ "-boot", "strict=off" ]
             ],
             "headless": true,
