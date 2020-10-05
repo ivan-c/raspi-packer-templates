@@ -49,7 +49,6 @@
             ],
             "headless": true,
             "http_directory": "http",
-            "boot_wait": "30s",
             "boot_command": [
                 "c<wait>",
                 "linux /install.a64/vmlinuz ",
