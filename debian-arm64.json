@@ -57,7 +57,6 @@
                 "keyboard-configuration/xkb-keymap=us ",
                 "console-setup/ask_detect=false ",
                 "console-setup/layoutcode=us ",
-                "console-setup/modelcode=pc105 ",
                 "debconf/frontend=noninteractive ",
                 "fb=false ",
                 "netcfg/get_hostname=unassigned-hostname ",
