@@ -29,6 +29,7 @@
             "type": "qemu",
             "accelerator": "kvm",
             "machine_type": "virt",
+            "memory": 1024,
             "net_device": "virtio-net",
             "use_default_display": true,
             "vm_name": "{{ user `vm_name` }}",
