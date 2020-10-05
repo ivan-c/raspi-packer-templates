@@ -60,7 +60,7 @@
                 "fb=false ",
                 "netcfg/get_hostname=unassigned-hostname ",
                 "netcfg/get_domain=unassigned-domain ",
-                "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/debian-10/preseed-aarch64.cfg<wait> ",
+                "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<wait> ",
                 "auto ",
                 "---",
                 "<enter><wait>",
