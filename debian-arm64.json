@@ -44,6 +44,7 @@
                 [ "-bios", "/usr/share/qemu-efi-aarch64/QEMU_EFI.fd" ],
                 [ "-machine", "virt,gic-version=3" ],
                 [ "-cpu", "cortex-a53" ],
+                [ "-monitor", "none" ],
                 [ "-boot", "strict=off" ]
             ],
             "headless": true,
