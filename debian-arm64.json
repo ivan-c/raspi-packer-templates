@@ -29,7 +29,7 @@
             "accelerator": "kvm",
             "machine_type": "virt",
             "memory": 1024,
-            "cpus": 4,
+            "cpus": 2,
             "net_device": "virtio-net",
             "use_default_display": true,
             "vm_name": "{{ user `vm_name` }}",
