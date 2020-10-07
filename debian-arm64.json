@@ -43,6 +43,7 @@
             "format": "raw",
             "qemu_binary": "qemu-system-aarch64",
             "qemuargs": [
+                [ "-serial file:serial-output.txt" ],
                 [ "-bios", "/usr/share/qemu-efi-aarch64/QEMU_EFI.fd" ],
                 [ "-machine", "virt,gic-version=3" ],
                 [ "-cpu", "cortex-a53" ],

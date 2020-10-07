@@ -3,7 +3,7 @@ name: 📦 Build Packer Images
 on: [push]
 jobs:
   packer-build:
-    timeout-minutes: 120
+    timeout-minutes: 5
     runs-on: ubuntu-latest
 
     steps:
@@ -21,3 +21,8 @@ jobs:
         run: /usr/bin/packer build debian-arm64.json
         env:
           PACKER_LOG: 1
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: serial-output.txt
+          path: serial-output.txt
