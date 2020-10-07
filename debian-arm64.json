@@ -40,6 +40,7 @@
             "ssh_password": "{{ user `ssh_password` }}",
             "ssh_wait_timeout": "{{ user `ssh_wait_timeout` }}",
             "disk_size": "{{ user `disk_size_MB` }}",
+            "format": "raw",
             "qemu_binary": "qemu-system-aarch64",
             "qemuargs": [
                 [ "-bios", "/usr/share/qemu-efi-aarch64/QEMU_EFI.fd" ],
