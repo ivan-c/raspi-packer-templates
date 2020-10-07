@@ -3,7 +3,7 @@ name: 📦 Build Packer Images
 on: [push]
 jobs:
   packer-build:
-    timeout-minutes: 5
+    timeout-minutes: 10
     runs-on: ubuntu-latest
 
     steps:
@@ -23,6 +23,7 @@ jobs:
           PACKER_LOG: 1
 
       - uses: actions/upload-artifact@v2
+        if: always()
         with:
           name: serial-output.txt
           path: serial-output.txt
