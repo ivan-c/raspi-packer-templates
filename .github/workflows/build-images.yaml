@@ -3,7 +3,6 @@ name: 📦 Build Packer Images
 on: [push]
 jobs:
   packer-build:
-    timeout-minutes: 120
     runs-on: ubuntu-latest
 
     steps:
