@@ -17,6 +17,9 @@ jobs:
       - name: Install packer
         run: wget --no-verbose http://http.us.debian.org/debian/pool/main/p/packer/packer_1.3.4+dfsg-4+b1_amd64.deb && sudo dpkg -i packer_1.3.4+dfsg-4+b1_amd64.deb
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Build packer image
         run: /usr/bin/packer build debian-arm64.json
         env:
