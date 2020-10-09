@@ -1,0 +1,28 @@
+---
+name: 📦 Build Packer Images
+on: [push]
+jobs:
+  packer-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install packer dependencies
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends qemu qemu-kvm qemu-efi-aarch64
+        env:
+          DEBIAN_FRONTEND: noninteractive
+
+      - name: Install packer
+        run: wget --no-verbose http://http.us.debian.org/debian/pool/main/p/packer/packer_1.3.4+dfsg-4+b1_amd64.deb && sudo dpkg -i packer_1.3.4+dfsg-4+b1_amd64.deb
+
+      - name: Build packer image
+        run: /usr/bin/packer build debian-arm64.json
+        env:
+          PACKER_LOG: 1
+
+      - name: Upload raw qemu image
+        uses: actions/upload-artifact@v1
+        with:
+          name: debian-arm64.img
+          path: output-qemu/debian-arm64
