@@ -65,10 +65,10 @@
             "type": "shell",
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -ES sh {{.Path}}",
             "scripts": [
-                "fix-debconf.debian.sh",
-                "fix-virtual-drivers.gnulinux.sh",
-                "fix-vagrant-ssh.debian.sh",
-                "cleanup.debian.sh"
+                "scripts/fix-debconf.debian.sh",
+                "scripts/fix-virtual-drivers.gnulinux.sh",
+                "scripts/fix-vagrant-ssh.debian.sh",
+                "scripts/cleanup.debian.sh"
             ]
         }
     ]
