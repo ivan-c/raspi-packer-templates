@@ -28,6 +28,7 @@
             "ssh_password": "{{ user `ssh_password` }}",
             "ssh_wait_timeout": "{{ user `ssh_wait_timeout` }}",
             "disk_size": "{{ user `disk_size_MB` }}",
+            "disk_detect_zeroes": "on",
             "disk_interface": "virtio-scsi",
             "format": "raw",
             "qemu_binary": "qemu-system-aarch64",
