@@ -7,10 +7,10 @@ TMP_DIR="$(mktemp --directory)"
 
 get_file() {
     local filepath="$1"
-#     curl "${BASE_URL}${filepath}" --silent --output "${TMP_DIR}${filepath}"
-    wget --quiet "${BASE_URL}${filepath}" --output-document "${TMP_DIR}${filepath}"
+    local temp_filepath="${TMP_DIR}/$(basename $filepath)"
 
-    echo "${TMP_DIR}${filepath}"
+    wget --quiet "${BASE_URL}${filepath}" --output-document "$temp_filepath"
+    echo "$temp_filepath"
 }
 
 
