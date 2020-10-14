@@ -33,6 +33,7 @@ apt-get purge -y \
     busybox \
     installation-report \
     wget \
+    ca-certificates \
     wireless-tools \
     wpasupplicant &&
     dpkg --list |
