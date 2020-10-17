@@ -1,0 +1,35 @@
+#!/bin/sh -eu
+
+firmware_version='1.20200601'
+wget --quiet --output-document /tmp/firmware.tar.gz \
+"https://github.com/raspberrypi/firmware/archive/${firmware_version}.tar.gz"
+
+tar xf /tmp/firmware.tar.gz --directory /tmp
+
+firmware_staging_dir=/tmp/firmware
+mv "/tmp/firmware-${firmware_version}" "$firmware_staging_dir"
+
+rm -rf \
+    "${firmware_staging_dir}"/boot/kernel*.img \
+    "${firmware_staging_dir}/boot/overlays"
+
+cp /usr/lib/u-boot/rpi_4/* "${firmware_staging_dir}/boot/"
+
+
+: "${PACKER_HTTP_ADDR?Packer HTTP server environment variable not set}"
+
+BASE_URL="http://${PACKER_HTTP_ADDR}/provision"
+TMP_DIR="$(mktemp --directory)"
+
+get_file() {
+    local filepath="$1"
+    local temp_filepath="${TMP_DIR}/$(basename $filepath)"
+
+    wget --quiet "${BASE_URL}${filepath}" --output-document "$temp_filepath"
+    echo "$temp_filepath"
+}
+
+
+install -m 644 -o root -g root "$(get_file /boot/config.txt)" /boot/config.txt
+
+rm -rf "$TMP_DIR"
