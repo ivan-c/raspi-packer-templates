@@ -22,7 +22,7 @@ jobs:
           PACKER_LOG: 1
 
       - name: Upload raw qemu image
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v1
         with:
           name: debian-arm64.img
           path: output-qemu/debian-arm64
