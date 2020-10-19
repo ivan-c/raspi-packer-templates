@@ -71,6 +71,7 @@
                 "scripts/apt-pinning.sh",
                 "scripts/raspi-packages.sh",
                 "scripts/raspi-firmware.sh",
+                "scripts/raspi-uboot.sh",
                 "scripts/cleanup.debian.sh"
             ]
         }
