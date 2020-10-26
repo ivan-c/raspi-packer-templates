@@ -15,6 +15,9 @@ rm -rf \
 
 cp /usr/lib/u-boot/rpi_4/* "${firmware_staging_dir}/boot/"
 
+echo Copying staging firmware to /boot directory...
+cp -R "${firmware_staging_dir}/boot/"* /boot/
+
 
 : "${PACKER_HTTP_ADDR?Packer HTTP server environment variable not set}"
 
