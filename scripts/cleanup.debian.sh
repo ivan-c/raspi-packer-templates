@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# remove hardcoded hostname (assign from DHCP)
+rm /etc/hostname
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Remove non-critical packages and clear cache
