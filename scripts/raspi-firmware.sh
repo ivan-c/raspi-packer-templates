@@ -1,14 +1,16 @@
 #!/bin/sh -eu
 
+TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
+
 # TODO set firmware version via environment variable
 firmware_version='1.20200601'
-wget --quiet --output-document /tmp/firmware.tar.gz \
+wget --quiet --output-document "$TMP_DIR"/firmware.tar.gz \
 "https://github.com/raspberrypi/firmware/archive/${firmware_version}.tar.gz"
 
-tar xf /tmp/firmware.tar.gz --directory /tmp
+tar xf "$TMP_DIR"/firmware.tar.gz --directory "$TMP_DIR"
 
-firmware_staging_dir=/tmp/firmware
-mv "/tmp/firmware-${firmware_version}" "$firmware_staging_dir"
+firmware_staging_dir="$TMP_DIR"/firmware
+mv "${TMP_DIR}/firmware-${firmware_version}" "$firmware_staging_dir"
 
 rm -rf \
     "${firmware_staging_dir}"/boot/kernel*.img \
@@ -26,7 +28,6 @@ cp "$raspi4_device_tree_blob" /boot/
 : "${PACKER_HTTP_ADDR?Packer HTTP server environment variable not set}"
 
 BASE_URL="http://${PACKER_HTTP_ADDR}/provision"
-TMP_DIR="$(mktemp --directory)"
 
 get_file() {
     local filepath="$1"
