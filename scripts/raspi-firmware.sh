@@ -1,5 +1,6 @@
 #!/bin/sh -eu
 
+# TODO set firmware version via environment variable
 firmware_version='1.20200601'
 wget --quiet --output-document /tmp/firmware.tar.gz \
 "https://github.com/raspberrypi/firmware/archive/${firmware_version}.tar.gz"
@@ -18,6 +19,9 @@ cp /usr/lib/u-boot/rpi_4/* "${firmware_staging_dir}/boot/"
 echo Copying staging firmware to /boot directory...
 cp -R "${firmware_staging_dir}/boot/"* /boot/
 
+
+raspi4_device_tree_blob="$(find /usr/lib/linux-image-*-arm64/broadcom/ -name bcm2711-rpi-4-b.dtb | sort | tail -n1)"
+cp "$raspi4_device_tree_blob" /boot/
 
 : "${PACKER_HTTP_ADDR?Packer HTTP server environment variable not set}"
 
