@@ -1,9 +1,11 @@
 #!/bin/sh -e
 
+cmdname="$(basename "$0")"
+
 : "${PACKER_HTTP_ADDR?Packer HTTP server environment variable not set}"
 
 BASE_URL="http://${PACKER_HTTP_ADDR}/provision"
-TMP_DIR="$(mktemp --directory)"
+TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
 
 get_file() {
     local filepath="$1"

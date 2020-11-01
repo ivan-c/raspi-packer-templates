@@ -1,5 +1,7 @@
 #!/bin/sh -eu
 
+cmdname="$(basename "$0")"
+
 TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
 
 # TODO set firmware version via environment variable
