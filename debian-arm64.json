@@ -68,6 +68,7 @@
                 "scripts/fix-debconf.debian.sh",
                 "scripts/fix-virtual-drivers.gnulinux.sh",
                 "scripts/fix-vagrant-ssh.debian.sh",
+                "scripts/add-ssh-keys.sh",
                 "scripts/apt-pinning.sh",
                 "scripts/raspi-packages.sh",
                 "scripts/raspi-firmware.sh",
