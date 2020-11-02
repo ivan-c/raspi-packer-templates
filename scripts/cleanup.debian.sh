@@ -58,11 +58,11 @@ rm -rf \
     /var/cache/apt/srcpkgcache.bin
 
 # Delete leftover documentation
-find /usr/share/doc -depth -type f ! -name copyright |
-    xargs rm ||
-    echo 'Deleted non-copyright documentation'
+find /usr/share/doc -depth -type f ! -name copyright | xargs rm
 
-find /usr/share/doc -empty | xargs rmdir ||
+echo 'Deleted non-copyright documentation'
+
+find /usr/share/doc -empty | xargs rmdir
 echo 'Deleted empty documentation'
 
 rm -rf \
