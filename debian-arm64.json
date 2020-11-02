@@ -70,7 +70,6 @@
                 "scripts/fix-vagrant-ssh.debian.sh",
                 "scripts/add-ssh-keys.sh",
                 "scripts/apt-pinning.sh",
-                "scripts/raspi-packages.sh",
                 "scripts/raspi-firmware.sh",
                 "scripts/raspi-uboot.sh",
                 "scripts/cleanup.debian.sh"
