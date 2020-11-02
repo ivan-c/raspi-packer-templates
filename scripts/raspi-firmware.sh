@@ -6,6 +6,8 @@ TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
 
 # TODO set firmware version via environment variable
 firmware_version='1.20200601'
+
+# TODO switch to raspi-firmware/testing package
 wget --quiet --output-document "$TMP_DIR"/firmware.tar.gz \
 "https://github.com/raspberrypi/firmware/archive/${firmware_version}.tar.gz"
 
