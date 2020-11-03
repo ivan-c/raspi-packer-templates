@@ -10,22 +10,24 @@ apt-get install -y \
     u-boot-rpi/testing \
     u-boot-menu/testing
 
+# TODO set firmware version via Packer environment variable
+default_rpi_firmware_version='1.20200601'
+RPI_FIRMWARE_VERSION=${RPI_FIRMWARE_VERSION:-$default_rpi_firmware_version}
 
-# TODO set firmware version via environment variable
-firmware_version='1.20200601'
-
-# TODO switch to raspi-firmware/testing package
 wget --quiet --output-document "$TMP_DIR"/firmware.tar.gz \
-"https://github.com/raspberrypi/firmware/archive/${firmware_version}.tar.gz"
-
-tar xf "$TMP_DIR"/firmware.tar.gz --directory "$TMP_DIR"
+"https://github.com/raspberrypi/firmware/archive/${RPI_FIRMWARE_VERSION}.tar.gz"
 
 firmware_staging_dir="$TMP_DIR"/firmware
-mv "${TMP_DIR}/firmware-${firmware_version}" "$firmware_staging_dir"
-
-rm -rf \
-    "${firmware_staging_dir}"/boot/kernel*.img \
-    "${firmware_staging_dir}/boot/overlays"
+mkdir "$firmware_staging_dir"
+tar xf "$TMP_DIR"/firmware.tar.gz --directory "$TMP_DIR"
+cd "${TMP_DIR}/firmware-${RPI_FIRMWARE_VERSION}"
+firmware_filepaths="
+/boot/start4.elf
+/boot/fixup4.dat
+"
+for firmware_filepath in $firmware_filepaths; do
+    cp --parents ".${firmware_filepath}" "$firmware_staging_dir"/
+done
 
 cp /usr/lib/u-boot/rpi_4/* "${firmware_staging_dir}/boot/"
 
