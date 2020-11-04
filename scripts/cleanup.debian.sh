@@ -3,29 +3,11 @@
 # remove hardcoded hostname (assign from DHCP)
 rm /etc/hostname
 
-export DEBIAN_FRONTEND=noninteractive
+# move unused grub config
+# TODO remove grub entirely
+mv /boot/grub/grub.cfg /boot/grub/grub.cfg.bak
 
-# Remove non-critical packages and clear cache
-apt-mark manual openssh-server
-apt-get purge -y \
-    tasksel \
-    tasksel-data \
-    task-english \
-    bsdmainutils \
-    pciutils \
-    libx11-data \
-    xauth \
-    libxmuu1 \
-    libxcb1 \
-    libx11-6 \
-    libxext6 \
-    whiptail \
-    kbd \
-    keyboard-configuration \
-    discover \
-    dmidecode \
-    busybox \
-    installation-report
+export DEBIAN_FRONTEND=noninteractive
 
 # remove language-specific development packages
 dpkg --list | awk '{ print $2 }' | grep -- '-dev' | xargs apt-get purge -y
