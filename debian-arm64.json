@@ -65,8 +65,6 @@
             "type": "shell",
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -ES sh {{.Path}}",
             "scripts": [
-                "scripts/fix-debconf.debian.sh",
-                "scripts/fix-virtual-drivers.gnulinux.sh",
                 "scripts/fix-vagrant-ssh.debian.sh",
                 "scripts/add-ssh-keys.sh",
                 "scripts/apt-pinning.sh",
