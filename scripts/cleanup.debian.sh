@@ -10,7 +10,6 @@ apt-mark manual openssh-server
 apt-get purge -y \
     tasksel \
     tasksel-data \
-    task-laptop \
     task-english \
     bsdmainutils \
     pciutils \
@@ -20,25 +19,13 @@ apt-get purge -y \
     libxcb1 \
     libx11-6 \
     libxext6 \
-    man-db \
-    nano \
-    whereami \
     whiptail \
-    perl \
-    make-guile \
     kbd \
     keyboard-configuration \
-    lvm2 \
-    eject \
     discover \
     dmidecode \
-    tcpd \
     busybox \
-    installation-report \
-    wget \
-    ca-certificates \
-    wireless-tools \
-    wpasupplicant
+    installation-report
 
 # remove language-specific development packages
 dpkg --list | awk '{ print $2 }' | grep -- '-dev' | xargs apt-get purge -y
