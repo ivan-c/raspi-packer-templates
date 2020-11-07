@@ -63,7 +63,7 @@
     "provisioners": [
         {
             "type": "shell",
-            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -ES sh {{.Path}}",
+            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo --preserve-env --stdin sh {{.Path}}",
             "scripts": [
                 "scripts/fix-vagrant-ssh.debian.sh",
                 "scripts/add-ssh-keys.sh",
