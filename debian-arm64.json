@@ -70,6 +70,7 @@
                 "scripts/apt-pinning.sh",
                 "scripts/raspi-firmware.sh",
                 "scripts/fixup-systemd.sh",
+                "scripts/install-ansible.sh",
                 "scripts/cleanup.debian.sh"
             ]
         }
