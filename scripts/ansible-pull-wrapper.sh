@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 
 cmdname="$(basename "$0")"
@@ -22,6 +22,34 @@ die(){
     exit 1
 }
 
+ensure_checkout() {
+    # invoke `ansible-pull --check` to setup VCS repository
+    local repo_url="$1"
+    local checkout_dir="$2"
+    if [ -d "$checkout_dir" ]; then
+        return
+    fi
+    echo "Setting up checkout..."
+    ansible-pull --check --url "$repo_url" --directory "$checkout_dir" > /dev/null || true
+}
+
+install_roles() {
+    # install roles required by ansible repository
+    local repo_url="$1"
+    local checkout_dir="$2"
+    ensure_checkout "$repo_url" "$checkout_dir"
+    echo "Updating roles..."
+    ansible-galaxy install --role-file="$checkout_dir"/requirements.yaml
+}
+
+# override $HOME if running via sudo
+if [ "$USER" = root ]; then
+    HOME=/root
+fi
+
+hostname="$(hostname)"
+default_checkout_dir="${HOME}/.ansible/pull/${hostname}"
+checkout_dir="$default_checkout_dir"
 
 # copy arguments; option parsing is destructive
 ARGS=$@
@@ -71,44 +99,29 @@ while :; do
     shift
 done
 
-default_checkout_dir=/tmp/ansible
-checkout_dir="${checkout_dir:-$default_checkout_dir}"
-
-default_repo_url='https://github.com/ivan-c/ansible-bootstrap'
-repo_url="${repo_url:-$default_repo_url}"
-
 # add user-installed pip paths
 PATH="${PATH}:${HOME}/.local/bin"
 
-# override implied default from debian-installer
-if [ "$USER" = root ] && [ "$HOME" = / ]; then
-    PATH="${PATH}:/root/.local/bin"
-    # todo use `find`
-    export PYTHONPATH=/root/.local/lib/python3.7/site-packages
-fi
+# TODO assign by filename pattern
+export ANSIBLE_INVENTORY="${ANSIBLE_INVENTORY:-"$checkout_dir"/hosts.ini}"
 
-if [ ! -d "$checkout_dir" ]; then
-    git clone "$repo_url" "$checkout_dir"
-fi
+default_repo_url="$(cd "$checkout_dir" 2> /dev/null && git remote get-url origin || true)"
+# allow override of repository URL via environment variable
+# precedence: environment variable, commandline option, default
+repo_url="${REPO_URL:-${repo_url:-$default_repo_url}}"
 
-# assume directory to checkout repository to contains requirements.yaml or requirements.yml
-ansible-galaxy install --role-file="$checkout_dir"/requirements.yaml
 
-export ANSIBLE_INVENTORY="${ANSIBLE_INVENTORY:-hosts.ini}"
-# the below doesn't work
-#export ANSIBLE_PYTHON_INTERPRETER=python3
-
+install_roles "$repo_url" "$checkout_dir"
 
 # if current machine explicitly listed in inventory
 # limit ansible-pull plays to current machine
-hostname="$(hostname)"
-if grep --quiet "$hostname" "$checkout_dir/hosts.ini"; then
-    limit="--limit $hostname"
+ensure_checkout "$repo_url" "$checkout_dir"
+if [ -f "$ANSIBLE_INVENTORY" ] && grep --quiet "$hostname" "$ANSIBLE_INVENTORY"; then
+    limit_opt="--limit $hostname"
 fi
-
 ansible-pull \
-    $ARGS \
-    $limit \
+    $limit_opt \
+    --url "$repo_url" \
     --directory "$checkout_dir" \
-    --url $repo_url \
-    --extra-vars ansible_python_interpreter=python3
+    --extra-vars ansible_python_interpreter=python3 \
+    $ARGS
