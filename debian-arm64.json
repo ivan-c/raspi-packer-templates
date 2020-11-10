@@ -9,7 +9,9 @@
         "ssh_wait_timeout": "6h",
         "disk_size_MB": "8000",
         "http_directory": "http",
-        "shutdown_command": "echo 'vagrant' | sudo -S halt -p"
+        "shutdown_command": "echo 'vagrant' | sudo -S halt -p",
+        "ansible_pull_repo_url": "https://github.com/ivan-c/ansible-bootstrap",
+        "ansible_pull_inventory": "/etc/ansible/hosts.ini"
     },
     "builders": [
         {
@@ -63,6 +65,10 @@
     "provisioners": [
         {
             "type": "shell",
+            "environment_vars": [
+                "REPO_URL={{ user `ansible_pull_repo_url` }}",
+                "ANSIBLE_INVENTORY={{ user `ansible_pull_inventory` }}"
+            ],
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo --preserve-env --stdin sh {{.Path}}",
             "scripts": [
                 "scripts/fix-vagrant-ssh.debian.sh",
@@ -71,6 +77,8 @@
                 "scripts/raspi-firmware.sh",
                 "scripts/fixup-systemd.sh",
                 "scripts/install-ansible.sh",
+                "scripts/configure-ansible.sh",
+                "scripts/ansible-pull-wrapper.sh",
                 "scripts/cleanup.debian.sh"
             ]
         }
