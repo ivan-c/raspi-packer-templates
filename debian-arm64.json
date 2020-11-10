@@ -69,6 +69,7 @@
                 "scripts/add-ssh-keys.sh",
                 "scripts/apt-pinning.sh",
                 "scripts/raspi-firmware.sh",
+                "scripts/fixup-systemd.sh",
                 "scripts/cleanup.debian.sh"
             ]
         }
