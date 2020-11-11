@@ -79,6 +79,7 @@
                 "scripts/install-ansible.sh",
                 "scripts/configure-ansible.sh",
                 "scripts/ansible-pull-wrapper.sh",
+                "scripts/fixup-docker.sh",
                 "scripts/cleanup.debian.sh"
             ]
         }
