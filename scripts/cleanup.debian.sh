@@ -3,6 +3,9 @@
 # remove hardcoded hostname (assign from DHCP)
 rm /etc/hostname
 
+# remove DNS server config
+rm /etc/resolv.conf
+
 # move unused grub config
 # TODO remove grub entirely
 mv /boot/grub/grub.cfg /boot/grub/grub.cfg.bak
