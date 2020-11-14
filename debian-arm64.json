@@ -70,6 +70,7 @@
                 "ANSIBLE_INVENTORY={{ user `ansible_pull_inventory` }}"
             ],
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo --preserve-env --stdin sh {{.Path}}",
+            "expect_disconnect": true,
             "scripts": [
                 "scripts/fix-vagrant-ssh.debian.sh",
                 "scripts/add-ssh-keys.sh",
