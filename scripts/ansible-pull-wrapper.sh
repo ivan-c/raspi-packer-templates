@@ -30,7 +30,7 @@ ensure_checkout() {
         return
     fi
     echo "Setting up checkout..."
-    ansible-pull --check --url "$repo_url" --directory "$checkout_dir" > /dev/null || true
+    ansible-pull --check --checkout test/k8s-master_raspi-wip --url "$repo_url" --directory "$checkout_dir" > /dev/null || true
 }
 
 install_roles() {
@@ -124,4 +124,6 @@ ansible-pull \
     --url "$repo_url" \
     --directory "$checkout_dir" \
     --extra-vars ansible_python_interpreter=python3 \
+    -vv \
+    --checkout test/k8s-master_raspi-wip \
     $ARGS
