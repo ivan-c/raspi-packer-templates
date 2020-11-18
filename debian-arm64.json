@@ -8,6 +8,7 @@
         "ssh_password": "vagrant",
         "ssh_wait_timeout": "6h",
         "disk_size_MB": "8000",
+        "output_directory": "./output-qemu",
         "http_directory": "http",
         "shutdown_command": "echo 'vagrant' | sudo --stdin shutdown"
     },
@@ -31,6 +32,7 @@
             "disk_detect_zeroes": "on",
             "disk_interface": "virtio-scsi",
             "format": "raw",
+            "output_directory": "{{ user `output_directory` }}",
             "qemu_binary": "qemu-system-aarch64",
             "qemuargs": [
                 [ "-bios", "/usr/share/qemu-efi-aarch64/QEMU_EFI.fd" ],
