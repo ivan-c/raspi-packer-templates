@@ -16,7 +16,7 @@
             "type": "qemu",
             "accelerator": "kvm",
             "machine_type": "virt",
-            "memory": 1024,
+            "memory": 2048,
             "cpus": 2,
             "net_device": "virtio-net",
             "use_default_display": true,
