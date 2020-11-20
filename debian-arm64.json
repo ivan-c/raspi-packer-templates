@@ -9,7 +9,7 @@
         "ssh_wait_timeout": "6h",
         "disk_size_MB": "8000",
         "http_directory": "http",
-        "shutdown_command": "echo 'vagrant' | sudo -S halt -p"
+        "shutdown_command": "echo 'vagrant' | sudo --stdin shutdown"
     },
     "builders": [
         {
