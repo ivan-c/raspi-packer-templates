@@ -67,7 +67,6 @@
             "type": "shell",
             "execute_command": "echo 'vagrant' | {{ .Vars }} sudo --preserve-env --stdin sh {{.Path}}",
             "scripts": [
-                "scripts/fix-vagrant-ssh.debian.sh",
                 "scripts/add-ssh-keys.sh",
                 "scripts/apt-pinning.sh",
                 "scripts/raspi-firmware.sh",
