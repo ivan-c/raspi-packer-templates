@@ -63,7 +63,7 @@
     "provisioners": [
         {
             "type": "shell",
-            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo --preserve-env --stdin sh {{.Path}}",
+            "execute_command": "{{ .Vars }} sudo --preserve-env sh {{.Path}}",
             "scripts": [
                 "scripts/add-ssh-keys.sh",
                 "scripts/apt-pinning.sh",
@@ -83,7 +83,7 @@
         },
         {
             "type": "shell",
-            "execute_command": "echo 'vagrant' | {{ .Vars }} sudo --preserve-env --stdin sh {{.Path}}",
+            "execute_command": "{{ .Vars }} sudo --preserve-env sh {{.Path}}",
             "script": "scripts/cleanup.debian.sh"
         }
     ]
