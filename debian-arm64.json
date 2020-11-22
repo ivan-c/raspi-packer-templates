@@ -7,10 +7,8 @@
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
         "ssh_wait_timeout": "6h",
-        "disk_size_MB": "8000",
         "output_directory": "./output-qemu",
-        "http_directory": "http",
-        "shutdown_command": "echo 'vagrant' | sudo --stdin shutdown"
+        "disk_size_MB": "8000"
     },
     "builders": [
         {
@@ -59,7 +57,7 @@
                 "<enter><wait>",
                 "boot<enter><wait>"
             ],
-            "shutdown_command": "{{ user `shutdown_command` }}"
+            "shutdown_command": "sudo shutdown"
         }
     ],
     "provisioners": [
