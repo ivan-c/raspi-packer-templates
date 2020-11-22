@@ -3,8 +3,9 @@
 # remove hardcoded hostname (assign from DHCP)
 rm /etc/hostname
 
-# remove DNS server config
-rm /etc/resolv.conf
+# replace libvirt DNS server config with google DNS
+echo nameserver 8.8.8.8 > /etc/resolv.conf
+
 
 # move unused grub config
 # TODO remove grub entirely
