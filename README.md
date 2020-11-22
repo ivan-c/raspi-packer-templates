@@ -4,10 +4,11 @@ Raspberry Pi Packer Templates
 Packer templates for building Raspberry Pi system images
 
 Uses packer [`qemu` builder](https://www.packer.io/docs/builders/qemu) and [`ansible-local` provisioner](https://www.packer.io/docs/provisioners/ansible-local) to build system images for the raspberry pi
+
 ---
 **NOTE**
 
-At the moment only the Raspberry Pi 4B is supported, and is pre-installed with kubernetes bootstrapping tools (`kubeadm`)
+At the moment only the Raspberry Pi 4B is supported, and system images are pre-installed with kubernetes bootstrapping tools (`kubeadm`)
 
 ---
 
