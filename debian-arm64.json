@@ -6,6 +6,7 @@
         "iso_checksum": "26275dd36c4bc81c6f6d52864ac33aea82c39cd958907e55a9c5734c2aeab346e7ffed3fc01e3f9aa0bfea5f96db5245e42c607c963803ab61357856ea8952c8",
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
+        "public_key_url": "",
         "ssh_wait_timeout": "6h",
         "output_directory": "./output-qemu",
         "disk_size_MB": "8000"
@@ -49,6 +50,10 @@
                 "debconf/frontend=noninteractive ",
                 "netcfg/get_hostname=unassigned-hostname ",
                 "netcfg/get_domain=unassigned-domain ",
+                "passwd/username={{ user `ssh_username` }} ",
+                "passwd/user-fullname={{ user `ssh_username` }} ",
+                "passwd/user-password={{ user `ssh_password` }} ",
+                "passwd/user-password-again={{ user `ssh_password` }} ",
                 "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<wait> ",
                 "auto ",
                 "---",
@@ -64,6 +69,9 @@
         {
             "type": "shell",
             "execute_command": "{{ .Vars }} sudo --preserve-env sh {{.Path}}",
+            "environment_vars": [
+                "PUBLIC_KEY_URL={{ user `public_key_url` }}"
+            ],
             "scripts": [
                 "scripts/add-ssh-keys.sh",
                 "scripts/apt-pinning.sh",

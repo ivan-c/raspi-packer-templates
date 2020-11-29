@@ -3,3 +3,6 @@ output-*
 
 # packer cache directory
 packer_cache
+
+# packer var files
+*vars.json

@@ -6,8 +6,20 @@ apt-get update
 apt-get install -y ca-certificates wget
 
 
-test -d ~root/.ssh || mkdir ~root/.ssh
-wget -O - https://github.com/ivan-c.keys > ~root/.ssh/authorized_keys
+if [ -z "$PUBLIC_KEY_URL" ]; then
+    echo "Public key URL missing; skipping public key installation"
+    exit 0
+fi
 
-test -d ~vagrant/.ssh || mkdir ~vagrant/.ssh
-wget -O - https://github.com/ivan-c.keys > ~vagrant/.ssh/authorized_keys
+user="${SUDO_USER:-$USER}"
+
+test -d /root/.ssh || mkdir --parents /root/.ssh
+wget --output-document - "$PUBLIC_KEY_URL" > /root/.ssh/authorized_keys
+
+test -d "/home/${user}/.ssh" || mkdir "/home/${user}/.ssh"
+chmod 0700 "/home/${user}/.ssh"
+
+wget --output-document - "$PUBLIC_KEY_URL" > "/home/${user}/.ssh/authorized_keys"
+chmod 0600 "/home/${user}/.ssh"/authorized_keys
+
+chown --recursive "${user}:${user}" "/home/${user}/.ssh"
