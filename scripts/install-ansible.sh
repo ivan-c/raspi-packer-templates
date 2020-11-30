@@ -3,14 +3,18 @@ set -e
 
 cmdname="$(basename "$0")"
 DEFAULT_ANSIBLE_VENV_DIR='/opt/ansible'
+DEFAULT_ANSIBLE_VERSION='2.9.15'
 
 usage() {
    cat << USAGE >&2
 Usage:
-   $cmdname [-h] [--help] [ansible-venv-directory]
+   $cmdname [-h] [--help] [ansible-version] [ansible-venv-directory]
    -h
    --help
           Show this help message
+
+   ansible-version
+          Optional version of ansible to install. Defaults to $DEFAULT_ANSIBLE_VERSION
 
    ansible-venv-directory
           Optional directory to install ansible virtual environment to. Defaults to $DEFAULT_ANSIBLE_VENV_DIR
@@ -24,7 +28,12 @@ USAGE
 
 ensure_ansible() {
     # install ansible, or exit early
-    local ansible_venv_dir="$1"
+    local ansible_version="$1"
+    local ansible_venv_dir="$2"
+
+    if [ -n "$ansible_version" ]; then
+        local ansible_version_suffix="==${ansible_version}"
+    fi
 
     if command -v ansible; then return; fi
 
@@ -44,7 +53,8 @@ ensure_ansible() {
 
     echo "Creating virtual environment at ${ansible_venv_dir}..."
     python3 -m venv --system-site-packages "$ansible_venv_dir"
-    "${ansible_venv_dir}/bin/python3" -m pip install ansible
+    echo "Installing ansible ${ansible_version} ..."
+    "${ansible_venv_dir}/bin/python3" -m pip install "ansible${ansible_version_suffix}"
 
     echo "Linking installation into /usr/local/bin/"
     find "${ansible_venv_dir}/bin/" -executable -name "ansible*" -exec ln --symbolic "{}" /usr/local/bin \;
@@ -55,7 +65,10 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     usage
 fi
 
-ANSIBLE_VENV_DIR="$1"
-ansible_venv_dir="${2:-$DEFAULT_ANSIBLE_VENV_DIR}"
+ANSIBLE_VERSION="${1:-$ANSIBLE_VERSION}"
+ansible_version="${ANSIBLE_VERSION:-$DEFAULT_ANSIBLE_VERSION}"
 
-ensure_ansible "$ansible_venv_dir"
+ANSIBLE_VENV_DIR="${2:-$ANSIBLE_VENV_DIR}"
+ansible_venv_dir="${ANSIBLE_VENV_DIR:-$DEFAULT_ANSIBLE_VENV_DIR}"
+
+ensure_ansible "$ansible_version" "$ansible_venv_dir"
