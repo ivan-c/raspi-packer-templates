@@ -2,11 +2,6 @@
 - hosts: docker_hosts
   roles:
     - geerlingguy.docker
-  pre_tasks:
-    - name: Install apt_key prerequisites
-      package:
-        name: gnupg
-        state: present
   post_tasks:
     - name: Use journald log driver for docker
       copy:
