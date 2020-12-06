@@ -5,4 +5,4 @@
 
 - name: geerlingguy.kubernetes
   src: https://github.com/geerlingguy/ansible-role-kubernetes
-  version: 4.1.0
+  version: 5.0.1
