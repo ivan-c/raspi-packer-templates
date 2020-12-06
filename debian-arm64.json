@@ -79,6 +79,7 @@
                 "scripts/apt-pinning.sh",
                 "scripts/raspi-firmware.sh",
                 "scripts/fixup-systemd.sh",
+                "scripts/fixup-iptables.sh",
                 "scripts/install-ansible.sh"
             ]
         },
