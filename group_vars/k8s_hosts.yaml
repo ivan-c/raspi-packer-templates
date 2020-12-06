@@ -1,4 +1,4 @@
 ---
-kubernetes_version: '1.18'
+kubernetes_version: '1.19'
 # do not initialize as master or node until after image deployed
 kubernetes_role: unassigned
