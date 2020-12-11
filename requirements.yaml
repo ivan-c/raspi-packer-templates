@@ -1,7 +1,6 @@
 ---
-- name: geerlingguy.docker
-  src: https://github.com/geerlingguy/ansible-role-docker
-  version: 2.9.0
+- name: ivan-c.containerd
+  src: https://github.com/ivan-c/ansible-role-containerd
 
 - name: geerlingguy.kubernetes
   src: https://github.com/geerlingguy/ansible-role-kubernetes

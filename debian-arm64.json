@@ -94,7 +94,7 @@
             "type": "ansible-local",
             "playbook_file": "./local.yaml",
             "galaxy_file": "./requirements.yaml",
-            "inventory_groups": "docker_hosts,k8s_hosts",
+            "inventory_groups": "containerd_hosts,k8s_hosts",
             "group_vars": "./group_vars",
             "command": "sudo ANSIBLE_FORCE_COLOR=1 PYTHONUNBUFFERED=1 ansible-playbook -vv",
             "extra_arguments": ["--extra-vars", "\"ansible_python_interpreter=python3 {{ user `extra_ansible_vars` }}\""]
