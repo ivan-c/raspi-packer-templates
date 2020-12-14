@@ -1,6 +1,8 @@
 
 Raspberry Pi Packer Templates
 =============================
+[![Packer Image 📦](https://github.com/ivan-c/raspi-packer-templates/workflows/%F0%9F%93%A6%20Build%20Packer%20Images/badge.svg)](https://github.com/ivan-c/raspi-packer-templates/actions?query=workflow%3A%22%F0%9F%93%A6+Build+Packer+Images%22)
+
 Packer templates for building Raspberry Pi system images
 
 Uses packer [`qemu` builder](https://www.packer.io/docs/builders/qemu) and [`ansible-local` provisioner](https://www.packer.io/docs/provisioners/ansible-local) to build system images for the raspberry pi
