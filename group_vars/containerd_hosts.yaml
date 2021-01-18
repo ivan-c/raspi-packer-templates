@@ -1,2 +1,3 @@
 ---
 docker_apt_arch: '{{ "arm64" if ansible_facts["machine"] == "aarch64" else "amd64" }}'
+containerd_snapshotter: devmapper
