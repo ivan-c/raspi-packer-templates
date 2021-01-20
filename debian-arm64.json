@@ -69,7 +69,7 @@
     "provisioners": [
         {
             "type": "shell",
-            "execute_command": "{{ .Vars }} sudo --preserve-env sh {{.Path}}",
+            "execute_command": "sudo {{ .Vars }} sh {{.Path}}",
             "environment_vars": ["PUBLIC_KEY_URL={{ user `public_key_url` }}"],
             "scripts": [
                 "scripts/add-ssh-keys.sh",
@@ -101,7 +101,7 @@
         },
         {
             "type": "shell",
-            "execute_command": "{{ .Vars }} sudo --preserve-env sh {{.Path}}",
+            "execute_command": "sudo {{ .Vars }} sh {{.Path}}",
             "script": "scripts/cleanup.debian.sh"
         }
     ]
