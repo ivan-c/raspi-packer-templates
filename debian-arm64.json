@@ -79,6 +79,12 @@
             ]
         },
         {
+          "type": "shell",
+          "pause_after": "5m",
+          "inline": ["sudo shutdown -r"],
+          "expect_disconnect": true
+        },
+        {
             "type": "shell",
             "execute_command": "{{ .Vars }} sudo --preserve-env sh {{.Path}}",
             "environment_vars": ["ANSIBLE_VERSION={{ user `ansible_version` }}"],
