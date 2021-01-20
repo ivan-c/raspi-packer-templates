@@ -70,17 +70,19 @@
         {
             "type": "shell",
             "execute_command": "{{ .Vars }} sudo --preserve-env sh {{.Path}}",
-            "environment_vars": [
-                "ANSIBLE_VERSION={{ user `ansible_version` }}",
-                "PUBLIC_KEY_URL={{ user `public_key_url` }}"
-            ],
+            "environment_vars": ["PUBLIC_KEY_URL={{ user `public_key_url` }}"],
             "scripts": [
                 "scripts/add-ssh-keys.sh",
                 "scripts/apt-pinning.sh",
-                "scripts/raspi-firmware.sh",
                 "scripts/fixup-iptables.sh",
-                "scripts/install-ansible.sh"
+                "scripts/raspi-firmware.sh"
             ]
+        },
+        {
+            "type": "shell",
+            "execute_command": "{{ .Vars }} sudo --preserve-env sh {{.Path}}",
+            "environment_vars": ["ANSIBLE_VERSION={{ user `ansible_version` }}"],
+            "script": "scripts/install-ansible.sh"
         },
         {
             "type": "ansible-local",
