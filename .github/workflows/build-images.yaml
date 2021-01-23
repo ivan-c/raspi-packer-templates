@@ -18,6 +18,10 @@ jobs:
 
       - name: Build packer image
         run: /usr/bin/packer build debian-arm64.json
+
+      - name: Build packer image with debug info (on build failure)
+        if: ${{ failure() }}
+        run: /usr/bin/packer build debian-arm64.json
         env:
           PACKER_LOG: 1
 
