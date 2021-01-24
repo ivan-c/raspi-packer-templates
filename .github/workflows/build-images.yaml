@@ -26,7 +26,63 @@ jobs:
           PACKER_LOG: 1
 
       - name: Upload raw qemu image
+        id: upload_artifact_retry_0
+        continue-on-error: true
         uses: actions/upload-artifact@v2
         with:
           name: debian-arm64.img
           path: output-qemu/debian-arm64
+
+      - name: Upload raw qemu image - retry 1
+        id: upload_artifact_retry_1
+        continue-on-error: true
+        if: steps.upload_artifact_retry_0.outcome=='failure'
+        uses: actions/upload-artifact@v2
+        with:
+          name: debian-arm64.img
+          path: output-qemu/debian-arm64
+
+      - name: Upload raw qemu image - retry 2
+        id: upload_artifact_retry_2
+        continue-on-error: true
+        if: steps.upload_artifact_retry_1.outcome=='failure'
+        uses: actions/upload-artifact@v2
+        with:
+          name: debian-arm64.img
+          path: output-qemu/debian-arm64
+
+      - name: Upload raw qemu image - retry 3
+        id: upload_artifact_retry_3
+        continue-on-error: true
+        if: steps.upload_artifact_retry_2.outcome=='failure'
+        uses: actions/upload-artifact@v2
+        with:
+          name: debian-arm64.img
+          path: output-qemu/debian-arm64
+
+      - name: Upload raw qemu image - retry 4
+        id: upload_artifact_retry_4
+        continue-on-error: true
+        if: steps.upload_artifact_retry_3.outcome=='failure'
+        uses: actions/upload-artifact@v2
+        with:
+          name: debian-arm64.img
+          path: output-qemu/debian-arm64
+
+      - name: Upload raw qemu image - retry 5
+        id: upload_artifact_retry_5
+        continue-on-error: true
+        if: steps.upload_artifact_retry_4.outcome=='failure'
+        uses: actions/upload-artifact@v2
+        with:
+          name: debian-arm64.img
+          path: output-qemu/debian-arm64
+
+      - name: Report upload-artifact retry status
+        if: always()
+        run: |
+          if ${{ steps.upload_artifact_retry_0.outcome=='success' || steps.upload_artifact_retry_1.outcome=='success' || steps.upload_artifact_retry_2.outcome=='success' || steps.upload_artifact_retry_3.outcome=='success' || steps.upload_artifact_retry_4.outcome=='success' || steps.upload_artifact_retry_5.outcome=='success' }}; then
+             echo success
+          else
+             exit 1
+          fi
