@@ -1,4 +1,5 @@
 #!/bin/sh
+# fail on first error
 set -e
 
 cmdname="$(basename "$0")"

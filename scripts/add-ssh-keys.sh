@@ -1,4 +1,7 @@
-#!/bin/sh -e
+#!/bin/sh
+# fail on first error
+set -e
+
 
 export DEBIAN_FRONTEND=noninteractive
 

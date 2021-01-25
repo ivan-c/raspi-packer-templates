@@ -1,5 +1,8 @@
-#!/bin/sh -eu
+#!/bin/sh
 # use nftables legacy iptables frontend until kubernetes supports nftables natively
+
+# fail on first error, or empty variables
+set -eu
 
 
 # TODO remove script when native k8s nftables support available

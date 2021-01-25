@@ -1,4 +1,6 @@
-#!/bin/sh -e
+#!/bin/sh
+# fail on first error
+set -e
 
 # remove hardcoded hostname (assign from DHCP)
 rm /etc/hostname

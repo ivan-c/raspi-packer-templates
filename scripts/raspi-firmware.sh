@@ -1,4 +1,6 @@
-#!/bin/sh -eu
+#!/bin/sh
+# fail on first error, or empty variables
+set -eu
 
 cmdname="$(basename "$0")"
 TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
