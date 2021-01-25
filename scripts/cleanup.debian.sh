@@ -6,11 +6,6 @@ rm /etc/hostname
 # replace libvirt DNS server config with google DNS
 echo nameserver 8.8.8.8 > /etc/resolv.conf
 
-
-# move unused grub config
-# TODO remove grub entirely
-mv /boot/grub/grub.cfg /boot/grub/grub.cfg.bak
-
 export DEBIAN_FRONTEND=noninteractive
 
 # remove language-specific development packages
