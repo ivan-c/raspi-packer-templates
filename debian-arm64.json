@@ -83,8 +83,7 @@
         },
         {
             "type": "shell",
-            "execute_command": "sudo {{ .Vars }} sh {{.Path}}",
-            "environment_vars": ["ANSIBLE_VERSION={{ user `ansible_version` }}"],
+            "execute_command": "sudo {{ .Vars }} sh {{.Path}} {{ user `ansible_version` }}",
             "script": "scripts/install-ansible.sh"
         },
         {
