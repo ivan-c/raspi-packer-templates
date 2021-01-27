@@ -9,7 +9,8 @@
         "ansible_version": "2.9.15",
         "ssh_wait_timeout": "6h",
         "output_directory": "./output-qemu",
-        "disk_size_MB": "8000"
+        "disk_size_MB": "8000",
+        "extra_ansible_vars": ""
     },
     "builders": [
         {
@@ -93,7 +94,7 @@
             "inventory_groups": "docker_hosts,k8s_hosts",
             "group_vars": "./group_vars",
             "command": "sudo ANSIBLE_FORCE_COLOR=1 PYTHONUNBUFFERED=1 ansible-playbook -vv",
-            "extra_arguments": ["--extra-vars", "\"ansible_python_interpreter=python3\""]
+            "extra_arguments": ["--extra-vars", "\"ansible_python_interpreter=python3 {{ user `extra_ansible_vars` }}\""]
         },
         {
             "type": "shell",
