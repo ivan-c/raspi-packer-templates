@@ -7,7 +7,6 @@
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
         "ansible_version": "2.9.15",
-        "public_key_url": "",
         "ssh_wait_timeout": "6h",
         "output_directory": "./output-qemu",
         "disk_size_MB": "8000"
@@ -70,9 +69,7 @@
         {
             "type": "shell",
             "execute_command": "sudo {{ .Vars }} sh {{.Path}}",
-            "environment_vars": ["PUBLIC_KEY_URL={{ user `public_key_url` }}"],
             "scripts": [
-                "scripts/add-ssh-keys.sh",
                 "scripts/apt-pinning.sh",
                 "scripts/fixup-iptables.sh",
                 "scripts/raspi-firmware.sh"

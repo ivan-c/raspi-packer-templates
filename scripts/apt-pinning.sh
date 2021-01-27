@@ -9,6 +9,11 @@ cmdname="$(basename "$0")"
 BASE_URL="http://${PACKER_HTTP_ADDR}/provision"
 TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
 
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update
+apt-get install -y ca-certificates wget
+
 get_file() {
     local filepath="$1"
     local temp_filepath="${TMP_DIR}/$(basename $filepath)"
