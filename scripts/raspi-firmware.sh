@@ -1,6 +1,6 @@
 #!/bin/sh
-# fail on first error, or empty variables
-set -eu
+# fail on first error
+set -e
 
 cmdname="$(basename "$0")"
 TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
@@ -8,7 +8,6 @@ TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install -y \
-    linux-image-arm64/testing \
     u-boot-rpi/testing \
     u-boot-menu/testing
 
