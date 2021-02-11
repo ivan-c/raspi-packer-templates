@@ -3,6 +3,32 @@
 set -e
 
 cmdname="$(basename "$0")"
+DEFAULT_RPI_FIRMWARE_VERSION='1.20200601'
+
+usage() {
+   cat << USAGE >&2
+Usage:
+   $cmdname [-h] [--help] [firmware-version]
+   -h
+   --help
+          Show this help message
+
+   firmware-version
+          Optional version of Raspberry Pi firmware to install. Defaults to $DEFAULT_RPI_FIRMWARE_VERSION
+
+    Install Raspberry Pi firmware and configs
+USAGE
+   exit 1
+}
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    usage
+fi
+
+RPI_FIRMWARE_VERSION="${1:-$RPI_FIRMWARE_VERSION}"
+rpi_firmware_version="${RPI_FIRMWARE_VERSION:-$DEFAULT_ANSIBLE_VERSION}"
+
+
 TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
 
 export DEBIAN_FRONTEND=noninteractive
@@ -11,12 +37,8 @@ apt-get install -y \
     u-boot-rpi/testing \
     u-boot-menu/testing
 
-# TODO set firmware version via Packer environment variable
-default_rpi_firmware_version='1.20200601'
-RPI_FIRMWARE_VERSION=${RPI_FIRMWARE_VERSION:-$default_rpi_firmware_version}
-
 wget --quiet --output-document "$TMP_DIR"/firmware.tar.gz \
-"https://github.com/raspberrypi/firmware/archive/${RPI_FIRMWARE_VERSION}.tar.gz"
+"https://github.com/raspberrypi/firmware/archive/${rpi_firmware_version}.tar.gz"
 
 firmware_staging_dir="$TMP_DIR"/firmware
 mkdir "$firmware_staging_dir"
