@@ -7,7 +7,7 @@
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
         "ansible_version": "2.9.15",
-        "install_raspi_firmware": true,
+        "rpi_firmware_version": "1.20200601",
         "ssh_wait_timeout": "6h",
         "output_directory": "./output-qemu",
         "disk_size_MB": "8000",
@@ -81,7 +81,7 @@
         },
         {
             "type": "shell",
-            "execute_command": "if [ '{{user `install_raspi_firmware`}}' = true ]; then sudo {{ .Vars }} sh {{.Path}}; fi",
+            "execute_command": "if [ -n '{{user `rpi_firmware_version`}}' ]; then sudo {{ .Vars }} sh {{.Path}} {{user `rpi_firmware_version`}}; fi",
             "environment_vars": "{{ user `extra_env_vars` }}",
             "script": "scripts/raspi-firmware.sh"
         },
