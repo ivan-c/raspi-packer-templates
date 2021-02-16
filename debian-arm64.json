@@ -3,7 +3,7 @@
         "vm_name": "debian-arm64",
         "iso_url": "http://ftp.debian.org/debian/dists/buster/main/installer-arm64/current/images/netboot/mini.iso",
         "iso_checksum_type": "sha512",
-        "iso_checksum": "dbdbd92d10340fbaf71c007eee4c7173a21775c4c81e4d8c34867016289c315ff6eaf2f341e7000f4d994b2b9938ba9bf29e1a7caceadae5627f6c8e57b13533",
+        "iso_checksum": "f038c887d1f00ae35eff4841be3facbb4b75335d29af296703e7cc321851c0e6f019cb43eda74005e48ee4243ed4a27d04f0e4d21f967dc68b50d82ccdc4f9ad",
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
         "ansible_version": "2.9.15",
