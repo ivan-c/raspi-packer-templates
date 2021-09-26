@@ -12,7 +12,8 @@
         "output_directory": "./output-qemu",
         "disk_size_MB": "8000",
         "extra_env_vars": "",
-        "extra_ansible_vars": ""
+        "extra_ansible_vars": "",
+        "extra_boot_args": "mirror/http/proxy="
     },
     "builders": [
         {
@@ -57,6 +58,8 @@
                 "passwd/user-fullname={{ user `ssh_username` }} ",
                 "passwd/user-password={{ user `ssh_password` }} ",
                 "passwd/user-password-again={{ user `ssh_password` }} ",
+                "no_proxy={{ .HTTPIP }} ",
+                "{{ user `extra_boot_args` }} ",
                 "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<wait> ",
                 "auto ",
                 "---",
