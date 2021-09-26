@@ -19,8 +19,7 @@ get_file() {
     local temp_filepath="${TMP_DIR}/$(basename $filepath)"
 
     # ignore proxy settings for packer internal http server
-    env --unset http_proxy \
-        wget --quiet "${BASE_URL}${filepath}" --output-document "$temp_filepath"
+    wget --no-proxy --quiet "${BASE_URL}${filepath}" --output-document "$temp_filepath"
     echo "$temp_filepath"
 }
 
