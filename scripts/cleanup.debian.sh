@@ -10,9 +10,10 @@ echo nameserver 8.8.8.8 > /etc/resolv.conf
 
 export DEBIAN_FRONTEND=noninteractive
 
-# remove language-specific development packages
+echo Removing language-specific development packages...
 dpkg --list | awk '{ print $2 }' | grep -- '-dev' | xargs apt-get purge -y
 
+echo Removing old kernels...
 dpkg --list | egrep 'linux-image-[0-9]' | awk '{ print $3,$2 }' | sort -nr | tail -n +2 | grep -v "$(uname -r)" | awk '{ print $2 }' | xargs apt-get purge -y
 
 apt-get autoremove --purge -y
@@ -27,13 +28,11 @@ rm -rf \
     /var/cache/apt/pkgcache.bin \
     /var/cache/apt/srcpkgcache.bin
 
-# Delete leftover documentation
-find /usr/share/doc -depth -type f ! -name copyright | xargs rm
+echo Deleting non-copyright documentation...
+find /usr/share/doc -depth -type f ! -name copyright -exec rm {} \;
 
-echo 'Deleted non-copyright documentation'
-
+echo Deleting empty documentation...
 find /usr/share/doc -empty | xargs rmdir
-echo 'Deleted empty documentation'
 
 rm -rf \
     /usr/share/man/* \
