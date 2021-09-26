@@ -34,8 +34,8 @@ TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install -y \
-    u-boot-rpi/testing \
-    u-boot-menu/testing
+    u-boot-rpi \
+    u-boot-menu
 
 wget --quiet --output-document "$TMP_DIR"/firmware.tar.gz \
 "https://github.com/raspberrypi/firmware/archive/${rpi_firmware_version}.tar.gz"

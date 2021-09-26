@@ -28,11 +28,9 @@ get_file() {
 install -m 644 -o root -g root "$(get_file /etc/apt/apt.conf.d/90defaultrelease)" /etc/apt/apt.conf.d/90defaultrelease
 
 install -m 644 -o root -g root "$(get_file /etc/apt/sources.list.d/stable.list)" /etc/apt/sources.list.d/stable.list
-install -m 644 -o root -g root "$(get_file /etc/apt/sources.list.d/testing.list)" /etc/apt/sources.list.d/testing.list
 install -m 644 -o root -g root "$(get_file /etc/apt/sources.list.d/security.list)" /etc/apt/sources.list.d/security.list
 
 install -m 644 -o root -g root "$(get_file /etc/apt/preferences.d/stable.pref)" /etc/apt/preferences.d/stable.pref
-install -m 644 -o root -g root "$(get_file /etc/apt/preferences.d/testing.pref)" /etc/apt/preferences.d/testing.pref
 install -m 644 -o root -g root "$(get_file /etc/apt/preferences.d/security.pref)" /etc/apt/preferences.d/security.pref
 
 rm -R "$TMP_DIR"

@@ -1,9 +1,9 @@
 {
     "variables": {
         "vm_name": "debian-arm64",
-        "iso_url": "http://ftp.debian.org/debian/dists/buster/main/installer-arm64/current/images/netboot/mini.iso",
+        "iso_url": "http://ftp.debian.org/debian/dists/bullseye/main/installer-arm64/current/images/netboot/mini.iso",
         "iso_checksum_type": "sha512",
-        "iso_checksum": "600f7f1550408c12c8c6183e55df2c1af62204146e9502b57b73dcc55d9242df5e7cc491bbd03daf056e81626e3fce5dcacdddc366ddb379f90e7da0e2f82407",
+        "iso_checksum": "8844c34a5b343b0f059f336a6c9b2502605e681df406b5535e846ac030705eee2ada0442864ef769f27cbd7161997076c22c2ba27a85df7baaf1ffdaa4ba055b",
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
         "ansible_version": "2.9.15",
@@ -75,8 +75,7 @@
             "environment_vars": "{{ user `extra_env_vars` }}",
             "scripts": [
                 "scripts/apt-pinning.sh",
-                "scripts/fixup-iptables.sh",
-                "scripts/update-kernel.sh"
+                "scripts/fixup-iptables.sh"
             ]
         },
         {
