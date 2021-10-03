@@ -1,2 +1,5 @@
 ---
 docker_apt_arch: '{{ "arm64" if ansible_facts["machine"] == "aarch64" else "amd64" }}'
+
+# docker-compose official releases are not built for arm64 until 2.0.1
+docker_install_compose: false

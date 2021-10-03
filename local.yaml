@@ -3,6 +3,10 @@
   roles:
     - geerlingguy.docker
   post_tasks:
+    - name: Install docker-compose from debian
+      apt:
+        name: docker-compose
+        state: present
     - name: Use journald log driver for docker
       copy:
         content: '{"log-driver": "journald", "storage-driver":"devicemapper"}'
