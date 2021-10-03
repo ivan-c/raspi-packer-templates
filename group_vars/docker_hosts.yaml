@@ -3,3 +3,8 @@ docker_apt_arch: '{{ "arm64" if ansible_facts["machine"] == "aarch64" else "amd6
 
 # docker-compose official releases are not built for arm64 until 2.0.1
 docker_install_compose: false
+
+docker_daemon_options:
+  # use devicemapper for compatibility with NFS root
+  storage-driver: devicemapper
+  log-driver: journald

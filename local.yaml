@@ -7,17 +7,6 @@
       apt:
         name: docker-compose
         state: present
-    - name: Use journald log driver for docker
-      copy:
-        content: '{"log-driver": "journald", "storage-driver":"devicemapper"}'
-        dest: /etc/docker/daemon.json
-      notify: restart docker
-  handlers:
-    - name: restart docker
-      service:
-        name: docker
-        state: restarted
-
 
 - hosts: k8s_hosts
   roles:
