@@ -43,6 +43,7 @@ ensure_ansible() {
         exit 1
     fi
 
+    export DEBIAN_FRONTEND=noninteractive
     echo 'Installing ansible ansible dependencies...'
     apt-get update
 
