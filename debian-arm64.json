@@ -2,8 +2,7 @@
     "variables": {
         "vm_name": "debian-arm64",
         "iso_url": "http://ftp.debian.org/debian/dists/bullseye/main/installer-arm64/current/images/netboot/mini.iso",
-        "iso_checksum_type": "sha512",
-        "iso_checksum": "8844c34a5b343b0f059f336a6c9b2502605e681df406b5535e846ac030705eee2ada0442864ef769f27cbd7161997076c22c2ba27a85df7baaf1ffdaa4ba055b",
+        "iso_checksum": "file:http://ftp.debian.org/debian/dists/bullseye/main/installer-arm64/current/images/SHA256SUMS",
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
         "ansible_version": "2.9.15",
@@ -26,7 +25,6 @@
             "use_default_display": true,
             "vm_name": "{{ user `vm_name` }}",
             "iso_url": "{{ user `iso_url` }}",
-            "iso_checksum_type": "{{ user `iso_checksum_type` }}",
             "iso_checksum": "{{ user `iso_checksum` }}",
             "ssh_username": "{{ user `ssh_username` }}",
             "ssh_password": "{{ user `ssh_password` }}",
