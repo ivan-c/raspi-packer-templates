@@ -47,7 +47,7 @@ ensure_ansible() {
     echo 'Installing ansible ansible dependencies...'
     apt-get update
 
-    local ansible_dependencies="$(apt-cache depends package-name ansible | grep 'Depends: [^<]' | awk '{print $NF}')"
+    local ansible_dependencies; ansible_dependencies="$(apt-cache depends package-name ansible | grep 'Depends: [^<]' | awk '{print $NF}')"
     apt-get install --yes --no-install-recommends \
         python3 python3-pip python3-setuptools python3-venv python3-wheel \
         ${ansible_dependencies} \

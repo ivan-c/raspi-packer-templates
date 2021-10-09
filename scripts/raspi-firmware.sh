@@ -65,7 +65,7 @@ cp "$raspi4_device_tree_blob" /boot/
 BASE_URL="http://${PACKER_HTTP_ADDR}/provision"
 get_file() {
     local filepath="$1"
-    local temp_filepath="${TMP_DIR}/$(basename $filepath)"
+    local temp_filepath; temp_filepath="${TMP_DIR}/$(basename "$filepath")"
 
     # ignore proxy settings for packer internal http server
     wget --no-proxy --quiet "${BASE_URL}${filepath}" --output-document "$temp_filepath"

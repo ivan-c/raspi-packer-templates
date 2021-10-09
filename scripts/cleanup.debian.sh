@@ -14,7 +14,7 @@ echo Removing language-specific development packages...
 dpkg --list | awk '{ print $2 }' | grep -- '-dev' | xargs apt-get purge -y
 
 echo Removing old kernels...
-dpkg --list | egrep 'linux-image-[0-9]' | awk '{ print $3,$2 }' | sort -nr | tail -n +2 | grep -v "$(uname -r)" | awk '{ print $2 }' | xargs apt-get purge -y
+dpkg --list | grep -E 'linux-image-[0-9]' | awk '{ print $3,$2 }' | sort -nr | tail -n +2 | grep -v "$(uname -r)" | awk '{ print $2 }' | xargs apt-get purge -y
 
 apt-get autoremove --purge -y
 
@@ -32,7 +32,7 @@ echo Deleting non-copyright documentation...
 find /usr/share/doc -depth -type f ! -name copyright -exec rm {} \;
 
 echo Deleting empty documentation...
-find /usr/share/doc -empty | xargs rmdir
+find /usr/share/doc -empty -delete
 
 rm -rf \
     /usr/share/man/* \
@@ -48,7 +48,7 @@ rm -rf \
     /var/lib/dhcp3/*
 
 # Clear log files
-find /var/log -type f | xargs truncate -s 0
+find /var/log -type f -exec truncate -s 0 {} \;
 
 # Clear temporary files
 rm -rf /tmp/*
