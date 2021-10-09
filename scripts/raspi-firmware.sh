@@ -32,10 +32,9 @@ rpi_firmware_version="${RPI_FIRMWARE_VERSION:-$DEFAULT_ANSIBLE_VERSION}"
 TMP_DIR="$(mktemp --directory --suffix "-$cmdname")"
 
 export DEBIAN_FRONTEND=noninteractive
+
 apt-get update
-apt-get install -y \
-    u-boot-rpi \
-    u-boot-menu
+apt-get install -y ca-certificates wget
 
 wget --quiet --output-document "$TMP_DIR"/firmware.tar.gz \
 "https://github.com/raspberrypi/firmware/archive/${rpi_firmware_version}.tar.gz"
@@ -52,6 +51,9 @@ for firmware_filepath in $firmware_filepaths; do
     cp --parents ".${firmware_filepath}" "$firmware_staging_dir"/
 done
 
+apt-get install -y \
+    u-boot-rpi \
+    u-boot-menu
 cp /usr/lib/u-boot/rpi_4/* "${firmware_staging_dir}/boot/"
 
 echo Copying staging firmware to /boot directory...

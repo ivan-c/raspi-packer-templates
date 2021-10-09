@@ -74,14 +74,11 @@
             "type": "shell",
             "execute_command": "sudo {{ .Vars }} sh {{.Path}}",
             "environment_vars": "{{ user `extra_env_vars` }}",
-            "scripts": [
-                "scripts/apt-pinning.sh",
-                "scripts/fixup-iptables.sh"
-            ]
+            "script": "scripts/fixup-iptables.sh"
         },
         {
             "type": "shell",
-            "execute_command": "if [ -n '{{user `rpi_firmware_version`}}' ]; then sudo {{ .Vars }} sh {{.Path}} {{user `rpi_firmware_version`}}; fi",
+            "execute_command": "if [ -n '{{user `rpi_firmware_version`}}' ]; then sudo {{ .Vars }} sh {{.Path}} {{user `rpi_firmware_version`}}; else echo Skipping firmware installation; fi",
             "environment_vars": "{{ user `extra_env_vars` }}",
             "script": "scripts/raspi-firmware.sh"
         },
