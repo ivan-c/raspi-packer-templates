@@ -1,0 +1,19 @@
+################
+# List of modules that you want to include in your initramfs.
+# They will be loaded at boot time in the order below.
+#
+# Syntax:  module_name [args ...]
+#
+# You must run update-initramfs(8) to effect this change.
+#
+# Examples:
+#
+# raid1
+# sd_mod
+
+# modules needed by raspi3 to netboot
+lan78xx
+async_pq
+linear
+cryptd
+aes_neon_blk
