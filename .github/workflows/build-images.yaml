@@ -2,8 +2,38 @@
 name: 📦 Build Packer Images
 on: [push]
 jobs:
+  shellcheck:
+    name: Shell script linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        env:
+          SHELLCHECK_OPTS: --exclude SC3043
+
+  ansible-lint:
+    name: Ansible linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint-action@master
+        with:
+          targets: |
+            local.yaml
+          # TODO pin ansible version to match version installed by packer
+          # override-deps: |
+            # ansible==2.9.15
+
+
   packer-build:
     runs-on: ubuntu-latest
+    # TODO split to separate Workflow, check status via GitHub API
+    # https://github.com/asarkar/build-time-tracker/blob/v3.0.1/.github/workflows/publish.yml#L19-L23
+    needs:
+      - shellcheck
+      - ansible-lint
 
     steps:
       - uses: actions/checkout@v1
