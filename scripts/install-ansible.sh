@@ -48,6 +48,7 @@ ensure_ansible() {
     apt-get update
 
     local ansible_dependencies; ansible_dependencies="$(apt-cache depends package-name ansible | grep 'Depends: [^<]' | awk '{print $NF}')"
+    # shellcheck disable=SC2086 # allow word splitting for space-separated package list
     apt-get install --yes --no-install-recommends \
         python3 python3-pip python3-setuptools python3-venv python3-wheel \
         ${ansible_dependencies} \
