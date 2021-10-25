@@ -8,6 +8,7 @@
         "ssh_wait_timeout": "6h",
         "output_directory": "./output-qemu",
         "disk_size_MB": "8000",
+        "local_cache": "false",
         "ansible_version": "2.9.15",
         "rpi_firmware_version": "1.20200601",
         "rpi_hardware_version": "4",
@@ -72,6 +73,11 @@
     ],
     "provisioners": [
         {
+            "type": "shell-local",
+            "script": "scripts/sync-cache.sh",
+            "execute_command": ["/bin/sh", "-c", "if [ '{{user `local_cache`}}' = true ]; then {{.Vars}} {{.Script}} load {{ user `ssh_username` }} {{ user `ssh_password` }}; else echo Skipping priming cached files; fi"]
+        },
+        {
             "type": "shell",
             "execute_command": "sudo {{ .Vars }} sh {{.Path}}",
             "environment_vars": "{{ user `extra_env_vars` }}",
@@ -109,6 +115,11 @@
             "group_vars": "./group_vars",
             "command": "sudo ANSIBLE_FORCE_COLOR=1 PYTHONUNBUFFERED=1 ansible-playbook -vv",
             "extra_arguments": ["--extra-vars", "\"ansible_python_interpreter=python3 {{ user `extra_ansible_vars` }}\""]
+        },
+        {
+            "type": "shell-local",
+            "script": "scripts/sync-cache.sh",
+            "execute_command": ["/bin/sh", "-c", "if [ '{{user `local_cache`}}' = true ]; then {{.Vars}} {{.Script}} save {{ user `ssh_username` }} {{ user `ssh_password` }}; else echo Skipping saving cached files; fi"]
         },
         {
             "type": "shell",
