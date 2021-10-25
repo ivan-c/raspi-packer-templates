@@ -8,6 +8,9 @@ rm /etc/hostname
 # replace libvirt DNS server config with google DNS
 echo nameserver 8.8.8.8 > /etc/resolv.conf
 
+echo Removing root home folder cache...
+rm -rf /root/.cache
+
 export DEBIAN_FRONTEND=noninteractive
 
 echo Removing language-specific development packages...
