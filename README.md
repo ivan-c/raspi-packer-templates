@@ -1,4 +1,3 @@
-
 # Raspberry Pi Packer Templates
 
 [![Packer Image 📦](https://github.com/ivan-c/raspi-packer-templates/workflows/%F0%9F%93%A6%20Build%20Packer%20Images/badge.svg)](https://github.com/ivan-c/raspi-packer-templates/actions?query=workflow%3A%22%F0%9F%93%A6+Build+Packer+Images%22)
@@ -25,6 +24,9 @@ After a successful run, the system image will be saved in `output-qemu/debian-ar
 By default, a system image for the Raspberry Pi 4B is generated. To build a system image for the Raspberry Pi 3B+, invoke packer as follows:
 
     packer build -var rpi_hardware_version=3 debian-arm64.json
+
+## Configuration
+[User Variables](https://www.packer.io/docs/templates/legacy_json_templates/user-variables) can be overridden invidiually by passing `-var 'key=value'` or passing a JSON file via `-var-file=path`. For a complete list of variables that can be overridden, see [Configuration](./CONFIG.md)
 
 ## Download
 Images are built by GitHub Actions with every commit. To download the image from a job, navigate to [Actions](https://github.com/ivan-c/packer-templates/actions), select the latest job and click the desired image in the Artifacts section.
