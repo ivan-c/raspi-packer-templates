@@ -12,6 +12,7 @@
         "ansible_version": "2.9.23",
         "rpi_firmware_version": "1.20200601",
         "rpi_hardware_version": "4",
+        "container_runtime": "docker",
         "extra_env_vars": "",
         "extra_ansible_vars": "",
         "extra_boot_args": "mirror/http/proxy="
@@ -109,9 +110,9 @@
         },
         {
             "type": "ansible-local",
-            "playbook_file": "./ansible/local.yaml",
-            "galaxy_file": "./ansible/requirements.yaml",
-            "inventory_groups": "docker_hosts,k8s_hosts",
+            "playbook_file": "./ansible/ansible-local.{{ user `container_runtime` }}.yaml",
+            "galaxy_file": "./ansible/requirements.{{ user `container_runtime` }}.yaml",
+            "inventory_groups": "{{ user `container_runtime` }}_hosts,k8s_hosts",
             "group_vars": "./ansible/group_vars",
             "command": "sudo ANSIBLE_FORCE_COLOR=1 PYTHONUNBUFFERED=1 ansible-playbook -vv",
             "extra_arguments": ["--extra-vars", "\"ansible_python_interpreter=python3 {{ user `extra_ansible_vars` }}\""]
