@@ -2,7 +2,3 @@
 - name: geerlingguy.docker
   src: https://github.com/geerlingguy/ansible-role-docker
   version: 4.1.0
-
-- name: geerlingguy.kubernetes
-  src: https://github.com/geerlingguy/ansible-role-kubernetes
-  version: 5.0.1

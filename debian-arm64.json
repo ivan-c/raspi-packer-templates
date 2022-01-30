@@ -112,7 +112,16 @@
             "type": "ansible-local",
             "playbook_file": "./ansible/ansible-local.{{ user `container_runtime` }}.yaml",
             "galaxy_file": "./ansible/requirements.{{ user `container_runtime` }}.yaml",
-            "inventory_groups": "{{ user `container_runtime` }}_hosts,k8s_hosts",
+            "inventory_groups": "{{ user `container_runtime` }}_hosts",
+            "group_vars": "./ansible/group_vars",
+            "command": "sudo ANSIBLE_FORCE_COLOR=1 PYTHONUNBUFFERED=1 ansible-playbook -vv",
+            "extra_arguments": ["--extra-vars", "\"ansible_python_interpreter=python3 {{ user `extra_ansible_vars` }}\""]
+        },
+        {
+            "type": "ansible-local",
+            "playbook_file": "./ansible/ansible-local.k8s.yaml",
+            "galaxy_file": "./ansible/requirements.k8s.yaml",
+            "inventory_groups": "k8s_hosts",
             "group_vars": "./ansible/group_vars",
             "command": "sudo ANSIBLE_FORCE_COLOR=1 PYTHONUNBUFFERED=1 ansible-playbook -vv",
             "extra_arguments": ["--extra-vars", "\"ansible_python_interpreter=python3 {{ user `extra_ansible_vars` }}\""]
