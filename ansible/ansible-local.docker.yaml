@@ -7,13 +7,3 @@
       apt:
         name: docker-compose
         state: present
-
-- hosts: k8s_hosts
-  roles:
-    - geerlingguy.kubernetes
-  post_tasks:
-    - name: Stop and disable kubelet until kubeadm init
-      service:
-        name: kubelet
-        state: stopped
-        enabled: false
