@@ -1,0 +1,2 @@
+---
+containerd_snapshotter: devmapper

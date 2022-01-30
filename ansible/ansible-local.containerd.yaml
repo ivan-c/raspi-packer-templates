@@ -1,0 +1,4 @@
+---
+- hosts: containerd_hosts
+  roles:
+    - ivan-c.containerd
