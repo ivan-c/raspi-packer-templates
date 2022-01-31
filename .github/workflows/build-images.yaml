@@ -21,8 +21,7 @@ jobs:
         uses: ansible/ansible-lint-action@master
         with:
           targets: |
-            local.yaml
-          # TODO remove when ansible-lint version in action updated
+            ansible/
           # https://github.com/ansible/ansible-lint-action/pull/48
           override-deps: |
             rich>=9.5.1,<11.0.0
