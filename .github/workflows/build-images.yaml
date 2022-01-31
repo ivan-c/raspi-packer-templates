@@ -21,7 +21,7 @@ jobs:
         uses: ansible/ansible-lint-action@master
         with:
           targets: |
-            local.yaml
+            ansible/
           # TODO pin ansible version to match version installed by packer
           # override-deps: |
             # ansible==2.9.15
