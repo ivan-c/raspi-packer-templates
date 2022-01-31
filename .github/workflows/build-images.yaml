@@ -22,10 +22,12 @@ jobs:
         with:
           targets: |
             ${{ github.workspace }}/ansible/
+          override-deps: |
+            ansible==2.10
+            ansible-lint==5.0.7
           # TODO pin ansible version to match version installed by packer
           # override-deps: |
             # ansible==2.9.15
-
 
   packer-build:
     runs-on: ubuntu-latest
