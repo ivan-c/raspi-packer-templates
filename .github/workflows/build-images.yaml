@@ -22,6 +22,10 @@ jobs:
         with:
           targets: |
             local.yaml
+          # TODO remove when ansible-lint version in action updated
+          # https://github.com/ansible/ansible-lint-action/pull/48
+          override-deps: |
+            rich>=9.5.1,<11.0.0
           # TODO pin ansible version to match version installed by packer
           # override-deps: |
             # ansible==2.9.15
