@@ -21,7 +21,9 @@ jobs:
         uses: ansible/ansible-lint-action@master
         with:
           targets: |
-            ${{ github.workspace }}/ansible/
+            ansible/
+          # TODO remove when ansible-lint version in action updated
+          # https://github.com/ansible/ansible-lint-action/pull/48
           override-deps: |
             ansible==2.10
             ansible-lint==5.3.2
