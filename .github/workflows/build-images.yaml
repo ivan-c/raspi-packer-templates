@@ -6,7 +6,7 @@ jobs:
     name: Shell script linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
         env:
@@ -16,7 +16,7 @@ jobs:
     name: Ansible linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run ansible-lint
         uses: ansible/ansible-lint-action@main
 
@@ -29,7 +29,7 @@ jobs:
       - ansible-lint
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
       - name: Install packer dependencies
         run: sudo apt-get update && sudo apt-get install --no-install-recommends qemu qemu-utils qemu-kvm qemu-system-aarch64 qemu-efi-aarch64
