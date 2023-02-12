@@ -9,7 +9,7 @@
         "output_directory": "./output-qemu",
         "disk_size": "8G",
         "local_cache": "false",
-        "ansible_version": "2.9.15",
+        "ansible_version": "2.10.7",
         "rpi_firmware_version": "1.20200601",
         "rpi_hardware_version": "4",
         "extra_env_vars": "",
