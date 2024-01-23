@@ -1,8 +1,8 @@
 {
     "variables": {
         "vm_name": "debian-arm64",
-        "iso_url": "http://ftp.debian.org/debian/dists/bullseye/main/installer-arm64/current/images/netboot/mini.iso",
-        "iso_checksum": "file:http://ftp.debian.org/debian/dists/bullseye/main/installer-arm64/current/images/SHA256SUMS",
+        "iso_url": "http://ftp.debian.org/debian/dists/bookworm/main/installer-arm64/current/images/netboot/mini.iso",
+        "iso_checksum": "file:http://ftp.debian.org/debian/dists/bookworm/main/installer-arm64/current/images/SHA256SUMS",
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
         "ssh_timeout": "6h",
