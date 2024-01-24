@@ -1,5 +1,10 @@
 ---
-docker_apt_arch: '{{ "arm64" if ansible_facts["machine"] == "aarch64" else "amd64" }}'
+# use debian-maintained docker package instead of Docker Inc. Community Edition (`docker-ce`) packages
+docker_packages:
+  - docker.io
+
+# do not configure Docker Inc. apt repos
+docker_add_repo: false
 
 # docker-compose official releases are not built for arm64 until 2.0.1
 docker_install_compose: false
